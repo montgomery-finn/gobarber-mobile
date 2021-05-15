@@ -19,6 +19,7 @@ import {
   ProvidersListTitle,
 } from './styles';
 import Icon from 'react-native-vector-icons/Feather';
+import { TouchableOpacity } from 'react-native-gesture-handler';
 
 export interface Provider {
   id: string;
@@ -35,6 +36,7 @@ const Dashboard: React.FC = () => {
 
   useEffect(() => {
     api.get('providers').then((response) => {
+      console.log('os providers => ', response.data);
       setProviders(response.data);
     });
   }, []);
@@ -58,6 +60,10 @@ const Dashboard: React.FC = () => {
           Bem Vindo, {'\n'}
           <UserName>{user.name}</UserName>
         </HeaderTitle>
+
+        <TouchableOpacity onPress={signOut}>
+          <Icon name="power" size={20} color="#fff" />
+        </TouchableOpacity>
 
         <ProfileButton onPress={navigateToProfile}>
           {user.avatarURL ? (
